@@ -29,15 +29,13 @@ public class Palabra {
         }
     }
     
-    public void lectura(BufferedReader f) {
+    public void lectura(BufferedReader f) throws Exception {
         numCaracteres=0;
-        try {
-            while ((caracter!=FINAL_SECUENCIA)&&(caracter!=ESPACIO)) {
-                caracteres[numCaracteres]=caracter;
-                numCaracteres++;
-                caracter = (char) f.read();
-            }
-        }catch (IOException e) {}
+        while ((caracter!=FINAL_SECUENCIA)&&(caracter!=ESPACIO)) {
+            caracteres[numCaracteres]=caracter;
+            numCaracteres++;
+            caracter = (char) f.read();
+        }
     }
     
     public void escritura(BufferedWriter f) throws Exception {
