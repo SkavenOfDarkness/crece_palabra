@@ -35,19 +35,16 @@ public class Palabra {
             while ((caracter!=FINAL_SECUENCIA)&&(caracter!=ESPACIO)) {
                 caracteres[numCaracteres]=caracter;
                 numCaracteres++;
-                caracter=(char) f.read();
+                caracter = (char) f.read();
             }
-        }catch (Exception e) {}
+        }catch (IOException e) {}
     }
     
-    public void escritura(BufferedWriter f) {
-        try {
-            for (int i=0;i<numCaracteres;i++) {
-                f.write(caracteres[i]);
-            }
-            f.write(ESPACIO);
-          //f.newLine();
-        }catch (Exception e) {}
+    public void escritura(BufferedWriter f) throws Exception {
+        for (int i=0;i<numCaracteres;i++) {
+            f.write(caracteres[i]);
+        }
+        f.write(ESPACIO);
     }
     
     private static void buscarPalabra() throws Exception {
@@ -57,12 +54,10 @@ public class Palabra {
         }
     }
     
-    public  static void buscarPalabra(BufferedReader f) {
-        try {
-            while (caracter==ESPACIO) {
-                caracter= (char) f.read();
-            }
-        } catch (Exception e) {}
+    public  static void buscarPalabra(BufferedReader f) throws Exception {
+        while (caracter==ESPACIO) {
+            caracter = (char) f.read();
+        }
     }
     
     public static boolean quedenPalabra() throws Exception {
@@ -70,9 +65,9 @@ public class Palabra {
         return (caracter != FINAL_SECUENCIA);
     }
     
-    public static boolean quedenPalabra(BufferedReader f) {
+    public static boolean quedenPalabra(BufferedReader f) throws Exception {
         buscarPalabra(f);
-        return (caracter!=(char) -1);
+        return (caracter != (char) -1);
     }
     
     @Override
@@ -88,7 +83,7 @@ public class Palabra {
         return numCaracteres;
     }
     
-    public static void Randomabecedario() throws Exception{
+    public static char[] Randomabecedario() throws Exception{
         char [] abecedario = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
         int cantidadLetras;
         //Preguntar y obtener la cantidad de letras
@@ -98,7 +93,7 @@ public class Palabra {
         //Declaracion del array de las letras que se van a sacar por random
         char [] Randomabecedario = new char[cantidadLetras];
         //System.out.println(cantidadLetras+" esto es la opcion elegida");
-        char todo;
+        //String todo = "";
 
         //fallo en recorrer el array Randomabecedario hay que ponerlo con .leght            
         // Bucle para relacionar lo obtenido por el random y el abecedario
@@ -107,11 +102,14 @@ public class Palabra {
            //System.out.print(numRandom+"-");
            Randomabecedario[i] = abecedario[numRandom];
            //Comprobar que escupe
-           System.out.println(Randomabecedario[i]);
-           }
+           //System.out.println(Randomabecedario[i]);
+        }
+        // Devolvemos el valor de las letras aleatorias
+        return Randomabecedario;
         //Metemos todas las letras en una variable codigo temporal
-        for (int en=0; en<Randomabecedario.length; en++){                     
-                System.out.print(Randomabecedario[en]);
-        }            
+//        for (int en=0; en<Randomabecedario.length; en++){                     
+//            //System.out.print(Randomabecedario[en]);
+//            todo = todo + Randomabecedario[en];
+//        }
     }
 }
