@@ -100,7 +100,7 @@ public class CrearMenu {
                       utilidades.limpiarPantalla();
                       System.out.print("Numero de letras iniciales \n");
                       //Llamar a numero de letras iniciales
-                      utilidades.Randomabecedario();
+                      Palabra.Randomabecedario();
                   case 2:
                       utilidades.limpiarPantalla();
                       System.out.print("Letras iniciales \n");
