@@ -68,20 +68,11 @@ public class Palabra {
         return (caracter != (char) -1);
     }
     
-    @Override
-    public String toString() {
-        String pal = "";
-        for (int i = 0; i < numCaracteres; i++) {
-            pal = pal + caracteres[i];
-        }
-        return pal;
-    }
-    
     public int getCaracteres() {
         return numCaracteres;
     }
     
-    public static char[] Randomabecedario() throws Exception{
+    public static char[] randomAbecedario() throws Exception {
         char [] abecedario = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
         int cantidadLetras;
         //Preguntar y obtener la cantidad de letras
@@ -109,5 +100,21 @@ public class Palabra {
 //            //System.out.print(Randomabecedario[en]);
 //            todo = todo + Randomabecedario[en];
 //        }
+    }
+    
+    public boolean cambioUnaLetra(char[] PActual, char[] PNueva) throws Exception {
+        boolean [] comprobar = new boolean[PActual.length];
+        int contador = 0;
+        for (int i = 0; i < PActual.length; i++) {
+            if (PActual[i] == PNueva[i]) {
+                comprobar[i] = true;
+            }
+        }
+        for (int i = 0; i < comprobar.length; i++) {
+            if (comprobar[i] == false) {
+                contador++;
+            }
+        }
+        return (contador == 1);
     }
 }
