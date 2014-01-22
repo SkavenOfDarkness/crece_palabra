@@ -174,4 +174,28 @@ public class Palabra {
         }
         return (contador == pActual.length);
     }
+    
+    // Añadir una letra en la palabra existente: 10 puntos
+    public static boolean añadirLetraPalabraExistente(char[] pActual, char[] pNueva) throws Exception {
+        char [] temp = new char[pNueva.length];
+        int contador = 0;
+        for (int i = 0; i < pActual.length; i++) {
+            for (int j = 0; j < pNueva.length; j++) {
+                if (pActual[i] == pNueva[j]) {
+                    temp[j] = pNueva[j];
+                    break;
+                }
+            }
+        }
+        int j = 0; //Variable que permite recorrer la palabra actual evitando el espacio
+        for (int i = 0; i < temp.length; i++) {
+            if (temp[i] != '\0') {
+                if (temp[i] == pActual[j]) {
+                    contador++;
+                    j++;
+                }
+            }
+        }
+        return (contador == pActual.length);
+    }
 }

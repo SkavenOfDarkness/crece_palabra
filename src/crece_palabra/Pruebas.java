@@ -10,8 +10,8 @@ package crece_palabra;
  */
 public class Pruebas {
     public static void main(String[] args) throws Exception {
-        char[] pActual = "casa".toCharArray();
-        char[] pNueva = "saco".toCharArray();
+        char[] pActual = "leas".toCharArray();
+        char[] pNueva = "lemas".toCharArray();
         if(Palabra.cambioUnaLetra(pActual, pNueva)){
             System.out.println("3 puntos");
         }
@@ -29,6 +29,12 @@ public class Pruebas {
         }
         else {
             System.out.println("No has cambiado una letra y tampoco el orden");
+        }
+        if(Palabra.añadirLetraPalabraExistente(pActual, pNueva)) {
+            System.out.println("10 puntos");
+        }
+        else {
+            System.out.println("No has agregado ninguna letra");
         }
     }
 }
