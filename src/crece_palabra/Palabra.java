@@ -102,19 +102,39 @@ public class Palabra {
 //        }
     }
     
-    public boolean cambioUnaLetra(char[] PActual, char[] PNueva) throws Exception {
-        boolean [] comprobar = new boolean[PActual.length];
+    // Sustituir una letra: 3 puntos
+    public boolean cambioUnaLetra(char[] pActual, char[] pNueva) throws Exception {
+        boolean [] comprobar = new boolean[pActual.length];
         int contador = 0;
-        for (int i = 0; i < PActual.length; i++) {
-            if (PActual[i] == PNueva[i]) {
+        for (int i = 0; i < pActual.length; i++) {
+            if (pActual[i] == pNueva[i]) {
                 comprobar[i] = true;
             }
         }
         for (int i = 0; i < comprobar.length; i++) {
-            if (comprobar[i] == false) {
+            if (!comprobar[i]) {
                 contador++;
             }
         }
         return (contador == 1);
+    }
+    
+    // Cambiar las letras de orden: 5 puntos
+    public boolean cambiarLetrasOrden(char[] pActual, char[] pNueva) throws Exception {
+        boolean [] comprobar = new boolean[pActual.length];
+        int contador = 0;
+        for (int i = 0; i < pActual.length; i++) {
+            for (int j = 0; j < pNueva.length; j++) {
+                if (pActual[i] == pNueva[j]) {
+                    comprobar[i] = true;
+                }
+            }
+        }
+        for (int i = 0; i < comprobar.length; i++) {
+            if (comprobar[i]) {
+                contador++;
+            }
+        }
+        return (contador == comprobar.length);
     }
 }
