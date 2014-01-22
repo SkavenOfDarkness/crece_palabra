@@ -73,7 +73,7 @@ public class Palabra {
     }
     
     public static char[] randomAbecedario() throws Exception {
-        char [] abecedario = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+        char [] abecedario = "abcdefghijklmnopqrstuvwxyz".toCharArray();
         int cantidadLetras;
         //Preguntar y obtener la cantidad de letras
         System.out.print("Introduce cantidad de letras: ");
@@ -103,7 +103,7 @@ public class Palabra {
     }
     
     // Sustituir una letra: 3 puntos
-    public boolean cambioUnaLetra(char[] pActual, char[] pNueva) throws Exception {
+    public static boolean cambioUnaLetra(char[] pActual, char[] pNueva) throws Exception {
         boolean [] comprobar = new boolean[pActual.length];
         int contador = 0;
         for (int i = 0; i < pActual.length; i++) {
@@ -120,21 +120,58 @@ public class Palabra {
     }
     
     // Cambiar las letras de orden: 5 puntos
-    public boolean cambiarLetrasOrden(char[] pActual, char[] pNueva) throws Exception {
-        boolean [] comprobar = new boolean[pActual.length];
+    public static boolean cambiarLetrasOrden(char[] pActual, char[] pNueva) throws Exception {
+        char [] abecedario = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+        int [] comprobarPActual = new int[abecedario.length];
+        int [] comprobarPNueva = new int[abecedario.length];
         int contador = 0;
         for (int i = 0; i < pActual.length; i++) {
-            for (int j = 0; j < pNueva.length; j++) {
-                if (pActual[i] == pNueva[j]) {
-                    comprobar[i] = true;
+            for (int j = 0; j < comprobarPActual.length; j++) {
+                if (pActual[i] == abecedario[j]) {
+                    comprobarPActual[j]++;
                 }
             }
         }
-        for (int i = 0; i < comprobar.length; i++) {
-            if (comprobar[i]) {
-                contador++;
+        for (int i = 0; i < pNueva.length; i++) {
+            for (int j = 0; j < comprobarPNueva.length; j++) {
+                if (pNueva[i] == abecedario[j]) {
+                    comprobarPNueva[j]++;
+                }
             }
         }
-        return (contador == comprobar.length);
+        for (int i = 0; i < comprobarPActual.length; i++) {
+            if (comprobarPActual[i] == comprobarPNueva[i]) {
+                contador = contador + comprobarPActual[i];
+            }
+        }
+        return (contador == pActual.length);
+    }
+    
+    // Cambiar las letras de orden y sustituir una: 1 puntos
+    public static boolean cambiarOrdenYSustituir(char[] pActual, char[] pNueva) throws Exception {
+        char [] abecedario = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+        int [] comprobarPActual = new int[abecedario.length];
+        int [] comprobarPNueva = new int[abecedario.length];
+        int contador = 0;
+        for (int i = 0; i < pActual.length; i++) {
+            for (int j = 0; j < comprobarPActual.length; j++) {
+                if (pActual[i] == abecedario[j]) {
+                    comprobarPActual[j]++;
+                }
+            }
+        }
+        for (int i = 0; i < pNueva.length; i++) {
+            for (int j = 0; j < comprobarPNueva.length; j++) {
+                if (pNueva[i] == abecedario[j]) {
+                    comprobarPNueva[j]++;
+                }
+            }
+        }
+        for (int i = 0; i < comprobarPActual.length; i++) {
+            //if ((comprobarPActual[i] >= comprobarPNueva[i]) || (comprobarPActual[i] <= comprobarPNueva[i])) {
+                contador = contador + comprobarPActual[i];
+            //}
+        }
+        return (contador == pActual.length);
     }
 }

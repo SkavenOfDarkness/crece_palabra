@@ -2,31 +2,33 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package extender_palabra;
+package crece_palabra;
 
 /**
  *
  * @author javier
  */
 public class Pruebas {
-
- 
-    public static void main(String[] args) {
-        // TODO code application logic here
-   
-     String [] abecedario = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M","N","O","P","Q","R","S","T","U","V","W", "X","Y","Z" };
-     String [] Randomabecedario=new String[300000];
-     for(int i=0;i<300000;i++){
-                      // int numRandom =(int) Math.round(Math.random()*27);  
-          int numRandom =(int) (Math.random()*26);
-                  if (numRandom==25){
-                      System.out.print("BINGO!!!!");
-                  }      
-                         
-               Randomabecedario[i] = abecedario[numRandom];
-               System.out.print(numRandom+"-"+Randomabecedario[i]+"\n");
-               
-      }
+    public static void main(String[] args) throws Exception {
+        char[] pActual = "casa".toCharArray();
+        char[] pNueva = "saco".toCharArray();
+        if(Palabra.cambioUnaLetra(pActual, pNueva)){
+            System.out.println("3 puntos");
+        }
+        else {
+            System.out.println("No has cambiado una letra");
+        }
+        if(Palabra.cambiarLetrasOrden(pActual, pNueva)) {
+            System.out.println("5 puntos");
+        }
+        else {
+            System.out.println("No has cambiado de orden las letras");
+        }
+        if(Palabra.cambiarOrdenYSustituir(pActual, pNueva)) {
+            System.out.println("1 punto");
+        }
+        else {
+            System.out.println("No has cambiado una letra y tampoco el orden");
+        }
     }
-    
 }
