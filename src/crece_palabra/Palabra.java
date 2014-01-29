@@ -72,6 +72,8 @@ public class Palabra {
         return numCaracteres;
     }
     
+   
+    
     public static char[] randomAbecedario() throws Exception {
         char [] abecedario = "abcdefghijklmnopqrstuvwxyz".toCharArray();
         int cantidadLetras;

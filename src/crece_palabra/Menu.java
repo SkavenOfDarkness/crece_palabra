@@ -100,7 +100,7 @@ static BufferedReader teclado = new BufferedReader(new InputStreamReader(System.
           // while (opcion!='3') {
             teclado.skip(1); 
             switch (opcion) {
-                case '1' : MenuPrincipal();break;  
+                case '1' : utilidades.ListaLetrasManual();MenuLetrasIniciales();break;  
                 case '2' : Palabra.randomAbecedario();MenuLetrasIniciales();break;
                 case '3' : MenuConfiguracion();break;
             }

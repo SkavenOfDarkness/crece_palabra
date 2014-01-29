@@ -22,25 +22,38 @@ public class utilidades {
                  }
            //Obtener numero del menu
             
-            public static int numeroMenu() throws Exception{               
-                
-                System.out.print("Introduce la opcion que deseas: ");
-                BufferedReader teclado=new BufferedReader(new InputStreamReader(System.in));                   
-              
-                int nu =Integer.parseInt(teclado.readLine());
-                teclado.skip(1);
-                return nu;
-                
-            } 
+            
            
            public static void ListaLetrasManual() throws Exception{
-            System.out.print("Introduce las letras que deseas: ");
-                BufferedReader teclado=new BufferedReader(new InputStreamReader(System.in));                   
-                //String letras =teclado.readLine();
-                char[] arrayLetras = teclado.readLine().toCharArray();
-                int NumeroLetras = arrayLetras.length;
-                System.out.print("Has seleccionado: "+NumeroLetras+" y son estas: "+arrayLetras);
+                
+                System.out.print("Introduce las letras que deseas: ");   
+                BufferedReader teclado=new BufferedReader(new InputStreamReader(System.in));
+                char[] letras = teclado.readLine().toCharArray();
+               /* for(int i=0;i<letras.length;i++){
+                    System.out.print(letras[i]);
+                    
+                }*/
+                utilidades.EscribirConfiguracion(1, letras);
            }
+           /*
+            1 - Español
+            2 - Catalan
+            3 - Ingles
+            */
+           public static void EscribirConfiguracion(int diccionario, char[] ListaLetras)throws Exception{
+              //BufferedWriter fichero = new BufferedWriter(new FileWriter("archivos/configuracion.txt"));
+             // FileOutputStream fichero=new FileOutputStream("archivos/configuracion.txt");
+             // FileWriter fichero = new FileWriter ("archivos/configuracion.txt");
+              /*String Lista = ListaLetras.toString();
+              fichero.write("safas");
+              fichero.close();*/
+               FileWriter fw = new FileWriter("archivos/configuracion.txt");
+                //Escribir, como ejemplo, los caracteres de la A a la Z
+                int c=1;
+                    fw.write(c);
+                 //Cerrar el fichero
+                fw.close();
+           } 
            
            
            
