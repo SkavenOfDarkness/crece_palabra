@@ -63,10 +63,28 @@ public class utilidades {
          
          public static void LeerRecord() throws Exception {
              int entrada;
-             BufferedReader buffer = new BufferedReader(new FileReader("/archivos/record.txt"));            
-             while((entrada=buffer.read()) != -1) {                 
-                System.out.print((char)entrada);
-             }  
+             //buffer prinpial de lecutra del archivo
+             BufferedReader buffer = new BufferedReader(new FileReader("archivos/record.txt"));
+             //buffer segundo debido a mirar si el archivo esta vacio.
+             BufferedReader buffer2 = new BufferedReader(new FileReader("archivos/record.txt"));
+             if(buffer2.read() != -1){
+                while((entrada=buffer.read()) != -1) {                 
+                    System.out.print((char)entrada);
+                }
+                System.out.println();
+             }
+             else{
+                 System.out.println("No hay records");
+             }
+             
              buffer.close();
-         }               
+             buffer2.close();
+         } 
+         
+          public static void ResetearRecord() throws Exception {
+            //Vaciamos el contenido del archivo.
+             FileWriter fichero = new FileWriter("archivos/record.txt");
+             fichero.close(); 
+          }
+          
 }

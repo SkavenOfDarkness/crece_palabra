@@ -55,7 +55,7 @@ static BufferedReader teclado = new BufferedReader(new InputStreamReader(System.
             teclado.skip(1); 
             switch (opcion) {
                 case '1' : utilidades.LeerRecord();MenuRecord();break;
-                case '2' : MenuRecord();break;               
+                case '2' : utilidades.ResetearRecord();MenuRecord();break;               
                 case '3' : MenuPrincipal();break;
             }
 //       }          
