@@ -5,7 +5,6 @@
 package crece_palabra;
 
 import java.io.*;
-import java.math.*;
 
 /**
  *
@@ -22,14 +21,16 @@ public class utilidades {
                      }
                  }
            //Obtener numero del menu
+            
             public static int numeroMenu() throws Exception{               
                 
                 System.out.print("Introduce la opcion que deseas: ");
                 BufferedReader teclado=new BufferedReader(new InputStreamReader(System.in));                   
-               // teclado.skip(1);
+              
                 int nu =Integer.parseInt(teclado.readLine());
-                
+                teclado.skip(1);
                 return nu;
+                
             } 
            
            public static void ListaLetrasManual() throws Exception{
@@ -60,7 +61,12 @@ public class utilidades {
                                             }
          }  
          
-         
-         
- //cierre final           
+         public static void LeerRecord() throws Exception {
+             int entrada;
+             BufferedReader buffer = new BufferedReader(new FileReader("/archivos/record.txt"));            
+             while((entrada=buffer.read()) != -1) {                 
+                System.out.print((char)entrada);
+             }  
+             buffer.close();
+         }               
 }

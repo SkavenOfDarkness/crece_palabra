@@ -9,11 +9,19 @@ package crece_palabra;
  * @author lluis
  */
 public class Crece_Palabra {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+ public static void main(String[] args) throws Exception {
+       //Instanciamos CrearMenu
+      // CrearMenu MenuPrincipal = new CrearMenu();
+       Menu MenuPrin = new Menu();
+      //Damos la bienvenida 
+       System.out.print("*******************************\n"
+                       +"*BIENVENIDO A EXTENDER_PALABRA*\n"
+                       +"*******************************\n"
+                        );
+       
+       //Llamamos a la funcion menuPrincipal de CrearMenu.java y nos imprime el menu
+      // MenuPrincipal.menuPrincipal();
+       MenuPrin.MenuPrincipal();
     }
 }
+

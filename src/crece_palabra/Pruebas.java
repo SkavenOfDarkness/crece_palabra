@@ -11,7 +11,7 @@ package crece_palabra;
 public class Pruebas {
     public static void main(String[] args) throws Exception {
         char[] pActual = "leas".toCharArray();
-        char[] pNueva = "lemas".toCharArray();
+        char[] pNueva = "lemsa".toCharArray();
         if(Palabra.cambioUnaLetra(pActual, pNueva)){
             System.out.println("3 puntos");
         }
