@@ -10,13 +10,11 @@ package crece_palabra;
  */
 public class Extender_Palabra {
 
-    /**
-     * @param args the command line arguments
-     */
+
     public static void main(String[] args) throws Exception {
        //Instanciamos CrearMenu
-       CrearMenu MenuPrincipal = new CrearMenu();
-       
+      // CrearMenu MenuPrincipal = new CrearMenu();
+       Menu MenuPrin = new Menu();
       //Damos la bienvenida 
        System.out.print("*******************************\n"
                        +"*BIENVENIDO A EXTENDER_PALABRA*\n"
@@ -24,6 +22,7 @@ public class Extender_Palabra {
                         );
        
        //Llamamos a la funcion menuPrincipal de CrearMenu.java y nos imprime el menu
-       MenuPrincipal.menuPrincipal();
+      // MenuPrincipal.menuPrincipal();
+       MenuPrin.MenuPrincipal();
     }
 }
