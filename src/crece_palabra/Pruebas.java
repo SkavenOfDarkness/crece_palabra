@@ -4,10 +4,6 @@
  */
 package crece_palabra;
 
-/**
- *
- * @author javier
- */
 public class Pruebas {
     public static void main(String[] args) throws Exception {
         char[] pActual = "leas".toCharArray();

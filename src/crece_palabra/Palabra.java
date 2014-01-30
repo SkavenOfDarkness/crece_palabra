@@ -71,9 +71,7 @@ public class Palabra {
     public int getCaracteres() {
         return numCaracteres;
     }
-    
-   
-    
+
     public static char[] randomAbecedario() throws Exception {
         char [] abecedario = "abcdefghijklmnopqrstuvwxyz".toCharArray();
         int cantidadLetras;
@@ -84,10 +82,8 @@ public class Palabra {
         //Declaracion del array de las letras que se van a sacar por random
         char [] Randomabecedario = new char[cantidadLetras];
         //System.out.println(cantidadLetras+" esto es la opcion elegida");
-        //String todo = "";
-
-        //fallo en recorrer el array Randomabecedario hay que ponerlo con .leght            
-        // Bucle para relacionar lo obtenido por el random y el abecedario
+        //String todo = "";          
+        //Bucle para relacionar lo obtenido por el random y el abecedario
         for(int i=0;i<cantidadLetras;i++){
            int numRandom = (int)Math.random()*26;                        
            //System.out.print(numRandom+"-");
@@ -98,10 +94,10 @@ public class Palabra {
         // Devolvemos el valor de las letras aleatorias
         return Randomabecedario;
         //Metemos todas las letras en una variable codigo temporal
-//        for (int en=0; en<Randomabecedario.length; en++){                     
-//            //System.out.print(Randomabecedario[en]);
-//            todo = todo + Randomabecedario[en];
-//        }
+        //for (int en=0; en<Randomabecedario.length; en++){                     
+            //System.out.print(Randomabecedario[en]);
+            //todo = todo + Randomabecedario[en];
+        //}
     }
     
     // Sustituir una letra: 3 puntos
