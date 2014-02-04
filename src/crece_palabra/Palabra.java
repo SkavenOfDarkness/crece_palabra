@@ -16,6 +16,7 @@ public class Palabra {
     private static char caracter = ESPACIO;
     private char [] caracteres = new char[MAXIMO];
     private int numCaracteres = 0;
+    public static int puntuacion = 0;
     
     // Interface
     // Metodos constructores 
@@ -73,14 +74,20 @@ public class Palabra {
         return numCaracteres;
     }
 
-    public static void randomAbecedario() throws Exception {
+    public static void randomAbecedario(int NumLetras) throws Exception {
         BufferedReader fr = new BufferedReader(new FileReader("archivos/configuracion.txt"));
         char [] Abecedario = "abcdefghijklmnopqrstuvwxyz".toCharArray();
         int CantidadLetras;
-        //Preguntar y obtener la cantidad de letras
-        System.out.print("Introduce cantidad de letras: ");
-        BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
-        CantidadLetras = Integer.parseInt(teclado.readLine());
+        if (NumLetras!=0){
+            //Preguntar y obtener la cantidad de letras
+            System.out.print("Introduce cantidad de letras: ");
+            BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+            CantidadLetras = Integer.parseInt(teclado.readLine());   
+        }
+        else{
+            CantidadLetras = NumLetras;
+        }
+
         //Declaracion del array de las letras que se van a sacar por random
         char [] RandomAbecedario = new char[CantidadLetras];            
         //Bucle para relacionar lo obtenido por el random y el abecedario
@@ -108,7 +115,11 @@ public class Palabra {
                 contador++;
             }
         }
-        return (contador == 1);
+        if (contador == 1) {
+            puntuacion = puntuacion + 3;
+            return true;
+        }
+        return false;
     }
     
     // Cambiar las letras de orden: 5 puntos
@@ -136,11 +147,15 @@ public class Palabra {
                 contador = contador + comprobarPActual[i];
             }
         }
-        return (contador == pActual.length);
+        if (contador == pActual.length) {
+            puntuacion = puntuacion + 5;
+            return true;
+        }
+        return false;
     }
     
     // Cambiar las letras de orden y sustituir una: 1 puntos
-    public static boolean cambiarOrdenYSustituir(char[] pActual, char[] pNueva) throws Exception {
+    public static boolean cambiarOrdenYSustituir(char[] pActual, char[] pNueva, int n) throws Exception {
         char [] abecedario = "abcdefghijklmnopqrstuvwxyz".toCharArray();
         int [] comprobarPActual = new int[abecedario.length];
         int [] comprobarPNueva = new int[abecedario.length];
@@ -164,7 +179,16 @@ public class Palabra {
                 contador = contador + comprobarPActual[i];
             //}
         }
-        return (contador == pActual.length);
+        if (contador == pActual.length) {
+            if (n == 1) {
+                puntuacion = puntuacion + 1;
+            }
+            else {
+                puntuacion = puntuacion + 5;
+            }
+            return true;
+        }
+        return false;
     }
     
     // Añadir una letra en la palabra existente: 10 puntos
@@ -188,6 +212,54 @@ public class Palabra {
                 }
             }
         }
-        return (contador == pActual.length);
+        if (contador == pActual.length) {
+            puntuacion = puntuacion + 10;
+            return true;
+        }
+        return false;
+    }
+    
+    public static void añadirPalabraUsada(char[] pNueva) throws Exception {
+        BufferedWriter Fwt = new BufferedWriter(new FileWriter("archivos/temp.txt", true));
+        Fwt.write(pNueva);
+        Fwt.newLine();
+        Fwt.close();
+    }
+    
+    public static boolean leerPalabraUsada(char[] pNueva) throws Exception {
+        BufferedReader Fwt = new BufferedReader(new FileReader("archivos/temp.txt"));
+        String palabra;
+        while((palabra=Fwt.readLine()) != null) {
+            char[] pal = palabra.toCharArray();
+            if (pal == pNueva) {
+                return true;
+            }  
+        }
+        Fwt.close();
+        return false;   
+    }
+    
+    public static boolean ComprobarPaPn(char[] pActual, char[] pNueva) throws Exception {
+        if(!leerPalabraUsada(pNueva)) {
+            System.out.println("antes-mirardiccionario");
+            if(Utilidades.MirarDiccionario(pNueva)) {
+                System.out.println("despues-mirardiccionario");
+                System.out.println(pActual.length + " " + pNueva.length);
+                if(pActual.length == pNueva.length) {    
+                    return ((cambioUnaLetra(pActual, pNueva)) || (cambiarLetrasOrden(pActual, pNueva)) || (cambiarOrdenYSustituir(pActual, pNueva, 1)));
+                }
+                if(pActual.length == (pNueva.length - 1)) {
+                    System.out.println("Antes del return");
+                    return ((añadirLetraPalabraExistente(pActual, pNueva)) || (cambiarOrdenYSustituir(pActual, pNueva, 5)));
+                }
+            }
+            else {
+                System.out.println("ELSE!!!!!!!!!!");
+                Juego.PalabraIncorrecta(pNueva);
+                return false;
+            }
+        }
+        System.out.println("La palabra ha sido introducida anteriormente");
+        return false;
     }
 }

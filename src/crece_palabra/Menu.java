@@ -21,11 +21,11 @@ public class Menu {
                 +".  0 Salir  \n"
                 );      
         System.out.print("Introduzca una opcion: ");
-        char  opcion=(char) teclado.read();
+        char opcion=(char) teclado.read();
         //while (opcion!='0') {
             teclado.skip(1); 
             switch (opcion) {
-                case '1' : MenuRecord();break;
+                case '1' : Juego.Jugar();MenuPrincipal();break;
                 case '2' : MenuRecord();break;            
                 case '3' : MenuConfiguracion();break;
                 default: break;
@@ -93,7 +93,7 @@ public class Menu {
             teclado.skip(1); 
             switch (opcion) {
                 case '1' : Utilidades.ListaLetrasManual();MenuLetrasIniciales();break;  
-                case '2' : Palabra.randomAbecedario();MenuLetrasIniciales();break;
+                case '2' : Palabra.randomAbecedario(0);MenuLetrasIniciales();break;
                 case '3' : MenuConfiguracion();break;
             }
         //}          

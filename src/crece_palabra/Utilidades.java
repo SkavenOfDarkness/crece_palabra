@@ -5,8 +5,12 @@
 package crece_palabra;
 
 import java.io.*;
+import java.util.Arrays;
 
 public class Utilidades {
+    //Valores de la configuracion inicial
+    public static int Diccionario = 1;
+    public static char[] Letras;
     
     public  Utilidades(){};
     
@@ -62,25 +66,7 @@ public class Utilidades {
         //Cerrar el fichero
         fw.close();
     } 
-              
-    //Mostramos la lista de los diccionarios que hay 
-    public static  void  ListarDiccionarios() throws Exception{
-        //Falta darle formato para mostrar los ficheros y quitarle que muestre .txt para mostrar como toca
-        // los diccionarios
-        File directorioDiccionario = new File("c:/pruebas");
-        String [] ListaDiccionarios = directorioDiccionario.list();
-        //Comprobamos la 
-        if (ListaDiccionarios == null){
-            System.out.println("No hay ficheros en el directorio especificado");
-        }
-        else { 
-            //Recorremos la lista de los diccionarios existentes
-            for (int i=0; i < ListaDiccionarios.length; i++) {
-                System.out.println(ListaDiccionarios[i]);
-            }
-        }
-    }  
-         
+                    
     public static void LeerRecord() throws Exception {
         int entrada;
         //buffer prinpial de lecutra del archivo
@@ -105,4 +91,64 @@ public class Utilidades {
         FileWriter fichero = new FileWriter("archivos/record.txt");
         fichero.close(); 
     }
+    
+    public static void CargaConfiguraciones() throws Exception {
+        BufferedReader br = new BufferedReader(new FileReader("archivos/configuracion.txt"));
+        Diccionario = Integer.parseInt(br.readLine());
+        Letras = br.readLine().toCharArray(); 
+        //Cerrar conexiones
+        br.close();  
+    }
+    
+    public static String Idioma() throws Exception {
+        String idioma;
+        switch(Diccionario){
+            case 1:
+                idioma = "espanol";
+                break;
+            case 2:
+                idioma = "catalan";
+                break;
+            case 3:
+                idioma = "ingles";
+                break;
+            default:
+                idioma = "";
+        }
+        return idioma;
+    }
+    
+    public static boolean MirarDiccionario(char[] PComparar) throws Exception {
+        BufferedReader Frd = new BufferedReader(new FileReader("archivos/diccionarios/"+Idioma()+".txt"));
+        String PDiccionario;
+        while((PDiccionario=Frd.readLine()) != null){
+            char[] diccio = PDiccionario.toCharArray();
+            if(Arrays.equals(diccio, PComparar)){
+                Frd.close();
+                return true;
+            }
+        }
+        Frd.close();
+        return false;
+    }
+    
+    public static void EscribirDiccionario(char[] PNueva) throws Exception {
+        BufferedWriter Fwd = new BufferedWriter(new FileWriter("archivos/diccionarios/"+Idioma()+".txt", true));
+        Fwd.write(PNueva);
+        Fwd.newLine();
+        Fwd.close();
+    }
+    
+//    public static char[] UsarComodin() throws Exception {
+//        char[] PalComodin;
+//        BufferedReader Frd = new BufferedReader(new FileReader("archivos/diccionarios/"+Idioma().toString()+".txt"));
+//        while((PalComodin = Frd.readLine().toCharArray()) != null) {
+//            
+//        }
+//    }
+//    
+//    public static void PalabraCorrecta() throws Exception {
+//        
+//    }
+//FINAL     
 }
