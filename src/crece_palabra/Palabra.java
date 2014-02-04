@@ -6,6 +6,7 @@
 package crece_palabra;
 
 import java.io.*;
+import java.math.*;
 
 public class Palabra {
     // Atributos
@@ -72,32 +73,25 @@ public class Palabra {
         return numCaracteres;
     }
 
-    public static char[] randomAbecedario() throws Exception {
-        char [] abecedario = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-        int cantidadLetras;
+    public static void randomAbecedario() throws Exception {
+        BufferedReader fr = new BufferedReader(new FileReader("archivos/configuracion.txt"));
+        char [] Abecedario = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+        int CantidadLetras;
         //Preguntar y obtener la cantidad de letras
         System.out.print("Introduce cantidad de letras: ");
         BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
-        cantidadLetras = Integer.parseInt(teclado.readLine());
+        CantidadLetras = Integer.parseInt(teclado.readLine());
         //Declaracion del array de las letras que se van a sacar por random
-        char [] Randomabecedario = new char[cantidadLetras];
-        //System.out.println(cantidadLetras+" esto es la opcion elegida");
-        //String todo = "";          
+        char [] RandomAbecedario = new char[CantidadLetras];            
         //Bucle para relacionar lo obtenido por el random y el abecedario
-        for(int i=0;i<cantidadLetras;i++){
-           int numRandom = (int)Math.random()*26;                        
-           //System.out.print(numRandom+"-");
-           Randomabecedario[i] = abecedario[numRandom];
-           //Comprobar que escupe
-           //System.out.println(Randomabecedario[i]);
-        }
-        // Devolvemos el valor de las letras aleatorias
-        return Randomabecedario;
-        //Metemos todas las letras en una variable codigo temporal
-        //for (int en=0; en<Randomabecedario.length; en++){                     
-            //System.out.print(Randomabecedario[en]);
-            //todo = todo + Randomabecedario[en];
-        //}
+        for(int i=0;i<CantidadLetras;i++){
+           int NumRandom = (int)(Math.random()*26);          
+           RandomAbecedario[i] = Abecedario[NumRandom];             
+        }  
+        //Parseamos a int el string que nos devuelve el readLine
+        int NumDic = Integer.parseInt(fr.readLine());
+        //Escribirmos en el archivo de configuracion el id del diccionario y las letras generadas
+        Utilidades.EscribirConfiguracion(NumDic, RandomAbecedario);       
     }
     
     // Sustituir una letra: 3 puntos

@@ -12,6 +12,7 @@ public class Menu {
     static BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
     public void MenuPrincipal() throws Exception {    
         //char opcion=' ';
+        Utilidades.limpiarPantalla();
         System.out.print("_-Menu Principal-_\n"
                 +"-------------------------------\n"
                 +".  1 Jugar  \n"
@@ -19,6 +20,7 @@ public class Menu {
                 +".  3 Configuración  \n"
                 +".  0 Salir  \n"
                 );      
+        System.out.print("Introduzca una opcion: ");
         char  opcion=(char) teclado.read();
         //while (opcion!='0') {
             teclado.skip(1); 
@@ -32,6 +34,7 @@ public class Menu {
     }
 
     public  void MenuRecord() throws Exception {
+        Utilidades.limpiarPantalla();
         //char opcion=' ';
         //while (opcion!='0') {
         System.out.print("__Menu Record__\n"
@@ -39,7 +42,8 @@ public class Menu {
                 +".  1 Ver records  .\n"
                 +".  2 Resetear records  .\n"                                   
                 +".  3 Atras  .\n"
-                );            
+                );        
+        System.out.print("Introduzca una opcion: ");
         char opcion=(char) teclado.read();  
         //while (opcion!='3') {
             teclado.skip(1); 
@@ -52,6 +56,7 @@ public class Menu {
     }
    
     public  void MenuConfiguracion() throws Exception {
+        Utilidades.limpiarPantalla();
         // char opcion=' ';
         //  while (opcion!='0') {
         System.out.print("_-Menu Configuracion-_\n"
@@ -60,18 +65,20 @@ public class Menu {
                 +".  2 Idioma diccionario  .\n"
                 +".  3 Atras  .\n"
                 );          
+        System.out.print("Introduzca una opcion: ");
         char opcion=(char) teclado.read();  
         //while (opcion!='3') {
             teclado.skip(1); 
             switch (opcion) {
                 case '1' : MenuLetrasIniciales();break;
-                case '2' : MenuRecord();break;
+                case '2' : Utilidades.ElegirDiccionario();MenuConfiguracion();break;
                 case '3' : MenuPrincipal();break;
             }
         //}          
     }
       
     public  void MenuLetrasIniciales() throws Exception {
+        Utilidades.limpiarPantalla();
         // char opcion=' ';
         //  while (opcion!='0') {
         System.out.print("_-Menu Letras iniciales-_\n"
@@ -79,7 +86,8 @@ public class Menu {
                 +".  1 Manual  .\n"
                 +".  2 Automatico  .\n"
                 +".  3 Atras  .\n"
-                );          
+                );     
+        System.out.print("Introduzca una opcion: ");
         char opcion=(char) teclado.read();  
         //while (opcion!='3') {
             teclado.skip(1); 

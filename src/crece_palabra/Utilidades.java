@@ -11,37 +11,54 @@ public class Utilidades {
     public  Utilidades(){};
     
     //Clase para limpiar pantalla
-    public  void  limpiarPantalla() {
+    public static void  limpiarPantalla() {
         for (int i=0; i<10; i++){
             System.out.println();
         }
     }
     
-    public static void ListaLetrasManual() throws Exception{          
+    public static void ListaLetrasManual() throws Exception{ 
+        BufferedReader fr = new BufferedReader(new FileReader("archivos/configuracion.txt"));
         System.out.print("Introduce las letras que deseas: ");   
-        BufferedReader teclado=new BufferedReader(new InputStreamReader(System.in));
-        char[] letras = teclado.readLine().toCharArray();
-        //for(int i=0;i<letras.length;i++){
-        //    System.out.print(letras[i]);
-        //}
-        Utilidades.EscribirConfiguracion(1, letras);
+        BufferedReader teclado= new BufferedReader(new InputStreamReader(System.in));
+        char[] Letras = teclado.readLine().toCharArray();       
+        int NumDic = Integer.parseInt(fr.readLine());
+        Utilidades.EscribirConfiguracion(NumDic, Letras);             
+        //Cerrar bufferes
+        fr.close();
+        
+    }
+    
+    public static void ElegirDiccionario() throws Exception{
+        BufferedReader fr = new BufferedReader(new FileReader("archivos/configuracion.txt"));
+        Utilidades.limpiarPantalla();
+        System.out.print("_-Menu Configuracion Diccionario-_\n"
+                + "-------------------------------\n"
+                + "1 Español \n"
+                + "2 Catalan \n"
+                + "3 Ingles \n"
+                + "Instroduce el numero del diccionario: ");
+        BufferedReader teclado= new BufferedReader(new InputStreamReader(System.in));
+        int NumDic = Integer.parseInt(teclado.readLine());
+        fr.readLine();
+        char[] Letras = fr.readLine().toCharArray();
+        Utilidades.EscribirConfiguracion(NumDic, Letras);
+        //Cerrar bufferes
+        fr.close();
     }
     /*
      1 - Español
      2 - Catalan
      3 - Ingles
      */
-    public static void EscribirConfiguracion(int diccionario, char[] ListaLetras)throws Exception{
-        //BufferedWriter fichero = new BufferedWriter(new FileWriter("archivos/configuracion.txt"));
-        // FileOutputStream fichero=new FileOutputStream("archivos/configuracion.txt");
-        // FileWriter fichero = new FileWriter ("archivos/configuracion.txt");
-        /*String Lista = ListaLetras.toString();
-        fichero.write("safas");
-        fichero.close();*/
-        FileWriter fw = new FileWriter("archivos/configuracion.txt");
-        //Escribir, como ejemplo, los caracteres de la A a la Z
-        int c=1;
-        fw.write(c);
+    public static void EscribirConfiguracion(int Diccionario, char[] ListaLetras)throws Exception{
+        BufferedWriter fw = new BufferedWriter(new FileWriter("archivos/configuracion.txt"));
+        
+        char NumDic = Character.forDigit(Diccionario, 10);
+        fw.write(NumDic);
+        fw.newLine();
+        fw.write(ListaLetras);
+        
         //Cerrar el fichero
         fw.close();
     } 
