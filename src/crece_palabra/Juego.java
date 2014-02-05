@@ -115,7 +115,7 @@ public class Juego {
             System.out.println("GAME OVER");
             Jugando = false;
             Utilidades.ResetearTemp();
-            //Utilidades.IntroducirRecord();
+            Utilidades.IntroducirRecord();
         }
     }  
 //FIN

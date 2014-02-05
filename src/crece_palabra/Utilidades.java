@@ -142,18 +142,37 @@ public class Utilidades {
         Fwd.close();
     }
     
-    //public static void IntroducirRecord()
-    
-//    public static char[] UsarComodin() throws Exception {
-//        char[] PalComodin;
-//        BufferedReader Frd = new BufferedReader(new FileReader("archivos/diccionarios/"+Idioma().toString()+".txt"));
-//        while((PalComodin = Frd.readLine().toCharArray()) != null) {
-//            
-//        }
-//    }
-//    
-//    public static void PalabraCorrecta() throws Exception {
-//        
-//    }
+    public static void IntroducirRecord() throws Exception {
+        BufferedReader buffer = new BufferedReader(new FileReader("archivos/record.txt"));
+        BufferedReader buffer2 = new BufferedReader(new FileReader("archivos/record.txt"));
+        BufferedReader teclado= new BufferedReader(new InputStreamReader(System.in));
+        if((buffer2.read()) != -1){
+            String nombre = buffer.readLine();
+            int record = Integer.parseInt(buffer.readLine());
+            if (Palabra.puntuacion > record) {
+                System.out.println("Has superado el record actual de "+nombre+" con "+record
+                    +" puntos\n Tu record es: "+Palabra.puntuacion+ " puntos");
+                System.out.print("Introduce tu nombre campeón: ");
+                BufferedWriter bufferEscritura = new BufferedWriter(new FileWriter("archivos/record.txt"));
+                bufferEscritura.write(teclado.readLine());
+                bufferEscritura.newLine();
+                bufferEscritura.write(String.valueOf(Palabra.puntuacion));
+                bufferEscritura.close();
+            }
+            else {
+                System.out.println("Tu puntuación es de: "+Palabra.puntuacion);
+            }
+        }
+        else{
+            System.out.println("Tu record es: "+Palabra.puntuacion+ " puntos");
+            System.out.print("Introduce tu nombre campeón: ");
+            BufferedWriter bufferEscritura = new BufferedWriter(new FileWriter("archivos/record.txt"));
+            bufferEscritura.write(teclado.readLine());
+            bufferEscritura.newLine();
+            bufferEscritura.write(String.valueOf(Palabra.puntuacion));
+            bufferEscritura.close();
+        }
+        buffer.close();
+    }
 //FINAL     
 }
