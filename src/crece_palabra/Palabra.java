@@ -240,22 +240,45 @@ public class Palabra {
         return false; 
     }
     
-    public static boolean ComprobarPaPn(char[] pActual, char[] pNueva) throws Exception {
-        if(leerPalabraUsada(pNueva) == false) {
-            if(Utilidades.MirarDiccionario(pNueva)) {
-                System.out.println(pActual.length + " " + pNueva.length);
-                if(pActual.length == pNueva.length) {    
-                    return ((cambioUnaLetra(pActual, pNueva)) || (cambiarLetrasOrden(pActual, pNueva)) || (cambiarOrdenYSustituir(pActual, pNueva, 1)));
+    public static boolean ComprobarPaPn(char[] pActual, char[] pNueva) throws Exception {       
+        int contador = 0;
+        int[] repetidas = new int[Utilidades.Letras.length];
+        for (int i = 0; i < pNueva.length; i++) {
+            for (int j = 0; j < Utilidades.Letras.length; j++) {
+                if(pNueva[i] == Utilidades.Letras[j]) {
+                    repetidas[j]++;
                 }
-                if(pActual.length == (pNueva.length - 1)) {
-                    return ((añadirLetraPalabraExistente(pActual, pNueva)) || (cambiarOrdenYSustituir(pActual, pNueva, 5)));
-                }
-            }
-            else {
-                return(Juego.PalabraIncorrecta(pNueva));
             }
         }
-        System.out.println("La palabra ha sido introducida anteriormente");
+        for (int i = 0; i < repetidas.length; i++) {
+            if(repetidas[i] == 1) {
+                contador++;
+            }
+        }
+        if (contador == pNueva.length) {
+            if(leerPalabraUsada(pNueva) == false) {
+                if(Utilidades.MirarDiccionario(pNueva)) {
+                    if(pActual != null) {
+                        if(pActual.length == pNueva.length) {    
+                            return ((cambioUnaLetra(pActual, pNueva)) || (cambiarLetrasOrden(pActual, pNueva)) || (cambiarOrdenYSustituir(pActual, pNueva, 1)));
+                        }
+                        if(pActual.length == (pNueva.length - 1)) {
+                            return ((añadirLetraPalabraExistente(pActual, pNueva)) || (cambiarOrdenYSustituir(pActual, pNueva, 5)));
+                        }
+                    }
+                    else {
+                        Juego.PActual = pNueva;
+                        return true;
+                    }
+                }
+                else {
+                    return(Juego.PalabraIncorrecta(pNueva));
+                }
+            }
+            System.out.println("La palabra ha sido introducida anteriormente");
+            return false;
+        }
+        System.out.println("La palabra no cumple las letras indicadas");
         return false;
     }
 }

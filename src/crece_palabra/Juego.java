@@ -5,6 +5,7 @@
 package crece_palabra;
 
 import java.io.*;
+import java.util.Arrays;
 
 public class Juego {
     public static int ContadorPalabras = 0;
@@ -69,40 +70,63 @@ public class Juego {
         }
     }
     
-    public static boolean PalabraIncorrecta(char[] pal)throws Exception{ 
-        System.out.print("Palabra no encontrada en el diccionario. "
-        + "La palabra realmente existe? (s/n) ");
-        respuesta = (char)teclado.read();
-        teclado.skip(1);
-        if(respuesta == 's') {
-            Utilidades.EscribirDiccionario(pal);
-            if(Palabra.ComprobarPaPn(PActual, pal)) {
-                ContadorPalabras++;
-                //PActual = pal;
-                return true;
+    public static boolean PalabraIncorrecta(char[] pal)throws Exception{
+        int contador = 0;
+        int[] repetidas = new int[Utilidades.Letras.length];
+        for (int i = 0; i < pal.length; i++) {
+            for (int j = 0; j < Utilidades.Letras.length; j++) {
+                if(pal[i] == Utilidades.Letras[j]) {
+                    repetidas[j]++;
+                }
             }
         }
-        else {
-            if((Comodin == true) && (ContadorPalabras != 0)) {
-                System.out.print("Palabra no encontrada en el diccionario. "
-                + "Quieres usar el comodín? (s/n) ");
-                respuesta = (char)teclado.read();
-                teclado.skip(1); 
-                if(respuesta == 's') {
-                    //pal2 = Utilidades.UsarComodin();
-                    //Palabra.añadirPalabraUsada(pal2);
-                    //ContadorPalabras++;
-                    System.out.print("Comodín usado");
-                    Comodin = false;
+        for (int i = 0; i < repetidas.length; i++) {
+            if(repetidas[i] == 1) {
+                contador++;
+            }
+        }
+        if (contador == pal.length) {
+            System.out.print("Palabra no encontrada en el diccionario. "
+            + "La palabra realmente existe? (s/n) ");
+            respuesta = (char)teclado.read();
+            teclado.skip(1);
+            if(respuesta == 's') {
+                Utilidades.EscribirDiccionario(pal);
+                if(Palabra.ComprobarPaPn(PActual, pal)) {
+                    ContadorPalabras++;
                     return true;
+                }
+            }
+            else {
+                if((Comodin == true) && (ContadorPalabras != 0)) {
+                    System.out.print("Palabra no encontrada en el diccionario. "
+                    + "Quieres usar el comodín? (s/n) ");
+                    respuesta = (char)teclado.read();
+                    teclado.skip(1);
+                    if(respuesta == 's') {
+                        char[] n = "n".toCharArray();
+                        char[] pal2 = Utilidades.UsarComodin();
+                        if(!Arrays.equals(pal2, n)) {
+                            Palabra.añadirPalabraUsada(pal2);
+                            PNueva = pal2;
+                            ContadorPalabras++;
+                            System.out.print("Comodín usado");
+                            Comodin = false;
+                            return true;
+                        }
+                        System.out.println("No se a encontrado palabra");
+                    }
+                    else {
+                        Juego.FinJuego();
+                    }
                 }
                 else {
                     Juego.FinJuego();
                 }
-            }
-            else {
-                Juego.FinJuego();
-            }
+            }          
+        }
+        else {
+            System.out.println("La palabra no cumple las letras indicadas");
         }
         return false;
     }

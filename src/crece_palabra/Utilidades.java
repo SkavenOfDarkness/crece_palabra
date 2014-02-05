@@ -174,5 +174,38 @@ public class Utilidades {
         }
         buffer.close();
     }
+    
+    public static char[] UsarComodin() throws Exception {
+        BufferedReader Frd = new BufferedReader(new FileReader("archivos/diccionarios/"+Idioma()+".txt"));
+        String PDiccionario;
+        char[] nulo = "n".toCharArray();
+        int contador = 0;
+        int[] repetidas = new int[Utilidades.Letras.length];
+        while((PDiccionario=Frd.readLine()) != null){
+            char[] diccio = PDiccionario.toCharArray();
+            for (int i = 0; i < diccio.length; i++) {
+                for (int j = 0; j < Letras.length; j++) {
+                    if(diccio[i] == Letras[j]) {
+                        repetidas[j]++;
+                    }
+                }
+            }
+            for (int i = 0; i < repetidas.length; i++) {
+                if(repetidas[i] == 1) {
+                    contador++;
+                }
+            }
+            if (contador == diccio.length) {
+                if(!Palabra.leerPalabraUsada(diccio)) {
+                    if(Palabra.ComprobarPaPn(Juego.PActual, diccio)) {
+                        return diccio;
+                    }
+                }
+            }
+            contador = 0;
+        }
+        Frd.close();
+        return nulo;
+    }
 //FINAL     
 }
