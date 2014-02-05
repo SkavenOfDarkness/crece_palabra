@@ -4,6 +4,8 @@
  */
 package crece_palabra;
 
+import java.io.*;
+
 public class Pruebas {
     public static void main(String[] args) throws Exception {
        /* char[] pActual = "leas".toCharArray();
@@ -34,9 +36,10 @@ public class Pruebas {
         }*/
         
         //Utilidades.CargaConfiguraciones();
-        char[] h = "lll".toCharArray();
-        System.out.print(Utilidades.MirarDiccionario(h));
+        //char[] h = "lll".toCharArray();
+        //System.out.print(Utilidades.MirarDiccionario(h));
         //System.out.print(Utilidades.Diccionario);
-        //System.out.print(Utilidades.Letras);
+        //System.out.print(Utilidades.Letras);  
+        
     }
 }

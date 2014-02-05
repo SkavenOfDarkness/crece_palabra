@@ -6,7 +6,7 @@
 package crece_palabra;
 
 import java.io.*;
-import java.math.*;
+import java.util.Arrays;
 
 public class Palabra {
     // Atributos
@@ -98,7 +98,9 @@ public class Palabra {
         //Parseamos a int el string que nos devuelve el readLine
         int NumDic = Integer.parseInt(fr.readLine());
         //Escribirmos en el archivo de configuracion el id del diccionario y las letras generadas
-        Utilidades.EscribirConfiguracion(NumDic, RandomAbecedario);       
+        Utilidades.EscribirConfiguracion(NumDic, RandomAbecedario);
+        //Cerramos conecxiones
+        fr.close();
     }
     
     // Sustituir una letra: 3 puntos
@@ -175,9 +177,7 @@ public class Palabra {
             }
         }
         for (int i = 0; i < comprobarPActual.length; i++) {
-            //if ((comprobarPActual[i] >= comprobarPNueva[i]) || (comprobarPActual[i] <= comprobarPNueva[i])) {
-                contador = contador + comprobarPActual[i];
-            //}
+            contador = contador + comprobarPActual[i];
         }
         if (contador == pActual.length) {
             if (n == 1) {
@@ -231,32 +231,28 @@ public class Palabra {
         String palabra;
         while((palabra=Fwt.readLine()) != null) {
             char[] pal = palabra.toCharArray();
-            if (pal == pNueva) {
+            if (Arrays.equals(pNueva, pal)) {
+                Fwt.close();
                 return true;
             }  
         }
         Fwt.close();
-        return false;   
+        return false; 
     }
     
     public static boolean ComprobarPaPn(char[] pActual, char[] pNueva) throws Exception {
-        if(!leerPalabraUsada(pNueva)) {
-            System.out.println("antes-mirardiccionario");
+        if(leerPalabraUsada(pNueva) == false) {
             if(Utilidades.MirarDiccionario(pNueva)) {
-                System.out.println("despues-mirardiccionario");
                 System.out.println(pActual.length + " " + pNueva.length);
                 if(pActual.length == pNueva.length) {    
                     return ((cambioUnaLetra(pActual, pNueva)) || (cambiarLetrasOrden(pActual, pNueva)) || (cambiarOrdenYSustituir(pActual, pNueva, 1)));
                 }
                 if(pActual.length == (pNueva.length - 1)) {
-                    System.out.println("Antes del return");
                     return ((añadirLetraPalabraExistente(pActual, pNueva)) || (cambiarOrdenYSustituir(pActual, pNueva, 5)));
                 }
             }
             else {
-                System.out.println("ELSE!!!!!!!!!!");
-                Juego.PalabraIncorrecta(pNueva);
-                return false;
+                return(Juego.PalabraIncorrecta(pNueva));
             }
         }
         System.out.println("La palabra ha sido introducida anteriormente");

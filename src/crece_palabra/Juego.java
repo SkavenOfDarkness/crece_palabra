@@ -6,15 +6,12 @@ package crece_palabra;
 
 import java.io.*;
 
-/**
- *
- * @author javier
- */
 public class Juego {
     public static int ContadorPalabras = 0;
     public static boolean Comodin = true, Jugando = true;
     public static char respuesta;
     public static char[] PActual, PNueva;
+    static BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
     
     public Juego(){}
     
@@ -27,17 +24,17 @@ public class Juego {
                 ValComodin = "No sisponible";
             }
             if(ContadorPalabras >= 1) {
-                System.out.println("El idioma del juegos es: "+"idioma"+" ## "+"Comodin: "+ValComodin);
+                System.out.println("El idioma del juegos es: "+Utilidades.Idioma()+" ## "+"Comodin: "+ValComodin);
             }
             else {
-                System.out.println("El idioma del juegos es: "+"idioma");
+                System.out.println("El idioma del juegos es: "+Utilidades.Idioma());
             }
             System.out.print("Letas disponibles: ");
             for (int i = 0; i < Utilidades.Letras.length; i++) {
                 System.out.print("["+Utilidades.Letras[i]+"]");               
             }
             System.out.println();
-            if(ContadorPalabras !=0){
+            if(ContadorPalabras != 0){
                 System.out.print("La palabra anterior es: ");
                 for (int i = 0; i < PActual.length; i++) {
                     System.out.print(PActual[i]);
@@ -47,9 +44,10 @@ public class Juego {
             System.out.print("Introduce una palabra: ");
             BufferedReader teclado2 = new BufferedReader(new InputStreamReader(System.in));
             PNueva = teclado2.readLine().toCharArray();
-            if(ContadorPalabras !=0){
-                System.out.println(Palabra.ComprobarPaPn(PActual, PNueva));
+            if(ContadorPalabras != 0){
                 if(Palabra.ComprobarPaPn(PActual, PNueva)) {
+                    Palabra.añadirPalabraUsada(PNueva);
+                    PActual = PNueva;
                     ContadorPalabras++;
                     System.out.println(Palabra.puntuacion);
                 }
@@ -64,31 +62,39 @@ public class Juego {
                     PalabraIncorrecta(PNueva);
                 }
             }
+            if (ContadorPalabras == 100) {
+                Palabra.puntuacion = Palabra.puntuacion + 500;
+                FinJuego();
+            }
         }
     }
     
-    public static void PalabraIncorrecta(char[] PNueva)throws Exception{ 
+    public static boolean PalabraIncorrecta(char[] pal)throws Exception{ 
         System.out.print("Palabra no encontrada en el diccionario. "
         + "La palabra realmente existe? (s/n) ");
-        respuesta = (char)System.in.read();
+        respuesta = (char)teclado.read();
+        teclado.skip(1);
         if(respuesta == 's') {
-            Utilidades.EscribirDiccionario(PNueva);
-            Palabra.añadirPalabraUsada(PNueva);
-            if(Palabra.ComprobarPaPn(PActual, PNueva)) {
+            Utilidades.EscribirDiccionario(pal);
+            if(Palabra.ComprobarPaPn(PActual, pal)) {
                 ContadorPalabras++;
-                PActual = PNueva;
-                System.out.println(Palabra.puntuacion);
+                //PActual = pal;
+                return true;
             }
         }
         else {
-            if(Comodin && ContadorPalabras != 0) {
+            if((Comodin == true) && (ContadorPalabras != 0)) {
                 System.out.print("Palabra no encontrada en el diccionario. "
                 + "Quieres usar el comodín? (s/n) ");
-                respuesta = (char)System.in.read();
+                respuesta = (char)teclado.read();
+                teclado.skip(1); 
                 if(respuesta == 's') {
-                    //PActual = Utilidades.UsarComodin();
-                    Palabra.añadirPalabraUsada(PActual);
-                    ContadorPalabras++;
+                    //pal2 = Utilidades.UsarComodin();
+                    //Palabra.añadirPalabraUsada(pal2);
+                    //ContadorPalabras++;
+                    System.out.print("Comodín usado");
+                    Comodin = false;
+                    return true;
                 }
                 else {
                     Juego.FinJuego();
@@ -98,16 +104,19 @@ public class Juego {
                 Juego.FinJuego();
             }
         }
+        return false;
     }
     
     public static void FinJuego() throws Exception {
         System.out.print("Quiere finalizar el juego? (s/n) ");
-        respuesta = (char)System.in.read();
+        respuesta = (char)teclado.read();
+        teclado.skip(1); 
         if(respuesta == 's') {
             System.out.println("GAME OVER");
             Jugando = false;
+            Utilidades.ResetearTemp();
+            //Utilidades.IntroducirRecord();
         }
-    }
-    
+    }  
 //FIN
 }

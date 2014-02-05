@@ -25,12 +25,11 @@ public class Utilidades {
         BufferedReader fr = new BufferedReader(new FileReader("archivos/configuracion.txt"));
         System.out.print("Introduce las letras que deseas: ");   
         BufferedReader teclado= new BufferedReader(new InputStreamReader(System.in));
-        char[] Letras = teclado.readLine().toCharArray();       
+        Letras = teclado.readLine().toCharArray();       
         int NumDic = Integer.parseInt(fr.readLine());
-        Utilidades.EscribirConfiguracion(NumDic, Letras);             
+        Utilidades.EscribirConfiguracion(NumDic, Letras);   
         //Cerrar bufferes
-        fr.close();
-        
+        fr.close();  
     }
     
     public static void ElegirDiccionario() throws Exception{
@@ -45,7 +44,7 @@ public class Utilidades {
         BufferedReader teclado= new BufferedReader(new InputStreamReader(System.in));
         int NumDic = Integer.parseInt(teclado.readLine());
         fr.readLine();
-        char[] Letras = fr.readLine().toCharArray();
+        Letras = fr.readLine().toCharArray();
         Utilidades.EscribirConfiguracion(NumDic, Letras);
         //Cerrar bufferes
         fr.close();
@@ -56,13 +55,11 @@ public class Utilidades {
      3 - Ingles
      */
     public static void EscribirConfiguracion(int Diccionario, char[] ListaLetras)throws Exception{
-        BufferedWriter fw = new BufferedWriter(new FileWriter("archivos/configuracion.txt"));
-        
+        BufferedWriter fw = new BufferedWriter(new FileWriter("archivos/configuracion.txt"));     
         char NumDic = Character.forDigit(Diccionario, 10);
         fw.write(NumDic);
         fw.newLine();
         fw.write(ListaLetras);
-        
         //Cerrar el fichero
         fw.close();
     } 
@@ -89,6 +86,12 @@ public class Utilidades {
     public static void ResetearRecord() throws Exception {
         //Vaciamos el contenido del archivo.
         FileWriter fichero = new FileWriter("archivos/record.txt");
+        fichero.close(); 
+    }
+    
+    public static void ResetearTemp() throws Exception {
+        //Vaciamos el contenido del archivo.
+        FileWriter fichero = new FileWriter("archivos/temp.txt");
         fichero.close(); 
     }
     
@@ -138,6 +141,8 @@ public class Utilidades {
         Fwd.newLine();
         Fwd.close();
     }
+    
+    //public static void IntroducirRecord()
     
 //    public static char[] UsarComodin() throws Exception {
 //        char[] PalComodin;
