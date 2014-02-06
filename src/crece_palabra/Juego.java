@@ -138,6 +138,9 @@ public class Juego {
         if(respuesta == 's') {
             System.out.println("GAME OVER");
             Jugando = false;
+            if (PActual.length >= 7) {
+                Palabra.puntuacion = Palabra.puntuacion + (PActual.length * 15);
+            }
             Utilidades.ResetearTemp();
             Utilidades.IntroducirRecord();
         }
