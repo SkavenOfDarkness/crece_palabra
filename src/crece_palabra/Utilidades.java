@@ -41,7 +41,7 @@ public class Utilidades {
                 + "2 Catalan \n"
                 + "3 Ingles \n"
                 + "Instroduce el numero del diccionario: ");
-        BufferedReader teclado= new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader teclado= new BufferedReader(new InputStreamReader(System.in));      
         int NumDic = Integer.parseInt(teclado.readLine());
         fr.readLine();
         Letras = fr.readLine().toCharArray();

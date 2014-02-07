@@ -81,7 +81,7 @@ public class Juego {
             }
         }
         for (int i = 0; i < repetidas.length; i++) {
-            if(repetidas[i] == 1) {
+            if(repetidas[i] >= 1) {
                 contador++;
             }
         }
@@ -138,9 +138,9 @@ public class Juego {
         if(respuesta == 's') {
             System.out.println("GAME OVER");
             Jugando = false;
-            if (PActual.length >= 7) {
+           /* if (PActual.length >= 7) {
                 Palabra.puntuacion = Palabra.puntuacion + (PActual.length * 15);
-            }
+            }*/
             Utilidades.ResetearTemp();
             Utilidades.IntroducirRecord();
         }
