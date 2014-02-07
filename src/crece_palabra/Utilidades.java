@@ -143,12 +143,17 @@ public class Utilidades {
     }
     
     public static void IntroducirRecord() throws Exception {
+        //Se habren dos buffers uno para comprobar si el fichero esta vacio y otro para leerlo
         BufferedReader buffer = new BufferedReader(new FileReader("archivos/record.txt"));
         BufferedReader buffer2 = new BufferedReader(new FileReader("archivos/record.txt"));
         BufferedReader teclado= new BufferedReader(new InputStreamReader(System.in));
+        //Mira que haya record
         if((buffer2.read()) != -1){
+            //Nombre actual del campeon
             String nombre = buffer.readLine();
+            //Puntuacion del actual record
             int record = Integer.parseInt(buffer.readLine());
+            //Comprobar si la puntuacion es mayor
             if (Palabra.puntuacion > record) {
                 System.out.println("Has superado el record actual de "+nombre+" con "+record
                     +" puntos\n Tu record es: "+Palabra.puntuacion+ " puntos");
@@ -159,10 +164,12 @@ public class Utilidades {
                 bufferEscritura.write(String.valueOf(Palabra.puntuacion));
                 bufferEscritura.close();
             }
+            //Cuando no es mayor la puntuacion sacamos la puntuacion del jugador
             else {
                 System.out.println("Tu puntuación es de: "+Palabra.puntuacion);
             }
         }
+        //En caso de no haber record guardado
         else{
             System.out.println("Tu record es: "+Palabra.puntuacion+ " puntos");
             System.out.print("Introduce tu nombre campeón: ");
@@ -176,11 +183,13 @@ public class Utilidades {
     }
     
     public static char[] UsarComodin() throws Exception {
+        //Buffer del diccionario que se esta usando 
         BufferedReader Frd = new BufferedReader(new FileReader("archivos/diccionarios/"+Idioma()+".txt"));
         String PDiccionario;
         char[] nulo = "n".toCharArray();
         int contador = 0;
         int[] repetidas = new int[Utilidades.Letras.length];
+        //leemos el diccionario hasta el final
         while((PDiccionario=Frd.readLine()) != null){
             char[] diccio = PDiccionario.toCharArray();
             for (int i = 0; i < diccio.length; i++) {
