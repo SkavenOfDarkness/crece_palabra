@@ -10,6 +10,7 @@ public class Menu {
     
     public Menu() {}
     static BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+    //Menu principal
     public void MenuPrincipal() throws Exception {    
         Utilidades.limpiarPantalla();
         System.out.print("_-Menu Principal-_\n"
@@ -30,6 +31,7 @@ public class Menu {
         }  
     }
 
+    //Menu principal
     public  void MenuRecord() throws Exception {
         Utilidades.limpiarPantalla();
         System.out.print("__Menu Record__\n"
@@ -48,6 +50,7 @@ public class Menu {
         }        
     }
    
+    //Menu configuraciones
     public  void MenuConfiguracion() throws Exception {
         Utilidades.limpiarPantalla();
         System.out.print("_-Menu Configuracion-_\n"
@@ -65,7 +68,7 @@ public class Menu {
             default: MenuPrincipal();break;
         }         
     }
-      
+    //Menu de las letras iniciales  
     public  void MenuLetrasIniciales() throws Exception {
         Utilidades.limpiarPantalla();
         System.out.print("_-Menu Letras iniciales-_\n"

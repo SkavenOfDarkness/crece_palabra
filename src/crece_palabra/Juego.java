@@ -62,7 +62,7 @@ public class Juego {
                     //Le da el valor de PNueva a PActual
                     PActual = PNueva;
                     ContadorPalabras++;
-                    System.out.println(Palabra.puntuacion);
+                    //System.out.println(Palabra.puntuacion);
                 }
             }
             //Caso en el que es la primera palabra
@@ -87,10 +87,12 @@ public class Juego {
             }
         }
     }
-    
+    //Se pasa la palabra nueva
     public static boolean PalabraIncorrecta(char[] pal)throws Exception{
         int contador = 0;
         int[] repetidas = new int[Utilidades.Letras.length];
+        //Comprobamos que las letras de la nueva palabra concuerden 
+        //con las letras disponibles
         for (int i = 0; i < pal.length; i++) {
             for (int j = 0; j < Utilidades.Letras.length; j++) {
                 if(pal[i] == Utilidades.Letras[j]) {
@@ -109,6 +111,7 @@ public class Juego {
             + "La palabra realmente existe? (s/n) ");
             respuesta = (char)teclado.read();
             teclado.skip(1);
+            //Si existe se agrega al diccionario y se comprueba
             if(respuesta == 's') {
                 Utilidades.EscribirDiccionario(pal);
                 if(Palabra.ComprobarPaPn(PActual, pal)) {
@@ -116,6 +119,7 @@ public class Juego {
                     return true;
                 }
             }
+            //Miramos si comodin disponible y lo ejecutamos si procede
             else {
                 if((Comodin == true) && (ContadorPalabras != 0)) {
                     System.out.print("Palabra no encontrada en el diccionario. "

@@ -10,19 +10,21 @@ import java.util.Arrays;
 
 public class Palabra {
     // Atributos
+    /*
     private static final char FINAL_SECUENCIA = '.';
     private static final int MAXIMO = 50;
     private static final char ESPACIO = ' ';
     private static char caracter = ESPACIO;
     private char [] caracteres = new char[MAXIMO];
     private int numCaracteres = 0;
+    */
     public static int puntuacion = 0;
     
     // Interface
     // Metodos constructores 
     public Palabra() {}
     
-    public void lectura() throws Exception {
+   /* public void lectura() throws Exception {
         numCaracteres = 0;
         while (((caracter >= 'a') && (caracter <= 'z')) || ((caracter >= 'A') && (caracter <= 'Z'))) {
             caracteres[numCaracteres] = caracter;
@@ -72,8 +74,9 @@ public class Palabra {
     
     public int getCaracteres() {
         return numCaracteres;
-    }
-
+    }*/
+    
+    //Genera automaticamente un un random, por cantida de letras deseadas
     public static void randomAbecedario() throws Exception {
         BufferedReader fr = new BufferedReader(new FileReader("archivos/configuracion.txt"));
         char [] Abecedario = "abcdefghijklmnopqrstuvwxyz".toCharArray();
@@ -213,6 +216,7 @@ public class Palabra {
         return false;
     }
     
+    //Añade la palabra que introduce el usuario al temp
     public static void añadirPalabraUsada(char[] pNueva) throws Exception {
         BufferedWriter Fwt = new BufferedWriter(new FileWriter("archivos/temp.txt", true));
         Fwt.write(pNueva);
@@ -220,6 +224,7 @@ public class Palabra {
         Fwt.close();
     }
     
+    //Recorre el fichero temp en busca de las palabras usadas
     public static boolean leerPalabraUsada(char[] pNueva) throws Exception {
         BufferedReader Fwt = new BufferedReader(new FileReader("archivos/temp.txt"));
         String palabra;
@@ -233,7 +238,7 @@ public class Palabra {
         Fwt.close();
         return false; 
     }
-    
+    //Comprueba el tamaño de la palabra para enviarlo a una fucion u otra
     public static boolean ComprobarPaPn(char[] pActual, char[] pNueva) throws Exception {       
         int contador = 0;
         int[] repetidas = new int[Utilidades.Letras.length];
