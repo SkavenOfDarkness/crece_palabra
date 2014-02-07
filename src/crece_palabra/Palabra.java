@@ -74,20 +74,14 @@ public class Palabra {
         return numCaracteres;
     }
 
-    public static void randomAbecedario(int NumLetras) throws Exception {
+    public static void randomAbecedario() throws Exception {
         BufferedReader fr = new BufferedReader(new FileReader("archivos/configuracion.txt"));
         char [] Abecedario = "abcdefghijklmnopqrstuvwxyz".toCharArray();
         int CantidadLetras;
-        if (NumLetras!=0){
-            //Preguntar y obtener la cantidad de letras
-            System.out.print("Introduce cantidad de letras: ");
-            BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
-            CantidadLetras = Integer.parseInt(teclado.readLine());   
-        }
-        else{
-            CantidadLetras = NumLetras;
-        }
-
+        //Preguntar y obtener la cantidad de letras
+        System.out.print("Introduce cantidad de letras: ");
+        BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+        CantidadLetras = Integer.parseInt(teclado.readLine());   
         //Declaracion del array de las letras que se van a sacar por random
         char [] RandomAbecedario = new char[CantidadLetras];            
         //Bucle para relacionar lo obtenido por el random y el abecedario
@@ -247,12 +241,13 @@ public class Palabra {
             for (int j = 0; j < Utilidades.Letras.length; j++) {
                 if(pNueva[i] == Utilidades.Letras[j]) {
                     repetidas[j]++;
+                    break;
                 }
             }
         }
         for (int i = 0; i < repetidas.length; i++) {
-            if(repetidas[i] == 1) {
-                contador++;
+            if(repetidas[i] >= 1) {
+                contador = contador + repetidas[i];
             }
         }
         if (contador == pNueva.length) {

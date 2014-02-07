@@ -95,12 +95,13 @@ public class Juego {
             for (int j = 0; j < Utilidades.Letras.length; j++) {
                 if(pal[i] == Utilidades.Letras[j]) {
                     repetidas[j]++;
+                    break;
                 }
             }
         }
         for (int i = 0; i < repetidas.length; i++) {
-            if(repetidas[i] >= 1) {
-                contador++;
+            if(repetidas[i] >= 1) {            
+                contador = contador + repetidas[i];
             }
         }
         if (contador == pal.length) {
@@ -157,9 +158,11 @@ public class Juego {
         if(respuesta == 's') {
             System.out.println("GAME OVER");
             Jugando = false;
-           /* if (PActual.length >= 7) {
-                Palabra.puntuacion = Palabra.puntuacion + (PActual.length * 15);
-            }*/
+            if(ContadorPalabras != 0) {
+                if (PActual.length >= 7) {
+                    Palabra.puntuacion = Palabra.puntuacion + (PActual.length * 15);
+                }
+            }
             //Reseteamos el archivo temp 
             Utilidades.ResetearTemp();
             //Miramos si ha habido record y se introduce

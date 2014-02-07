@@ -79,7 +79,7 @@ public class Menu {
         teclado.skip(1); 
         switch (opcion) {
             case '1': Utilidades.ListaLetrasManual();MenuLetrasIniciales();break;  
-            case '2': Palabra.randomAbecedario(0);MenuLetrasIniciales();break;
+            case '2': Palabra.randomAbecedario();MenuLetrasIniciales();break;
             default: MenuConfiguracion();break;
         }        
     }   
